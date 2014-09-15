@@ -19,6 +19,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

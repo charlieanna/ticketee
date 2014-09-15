@@ -1,1 +1,7 @@
 <%= link_to 'New Project', new_project_path %>
+
+<ul class="projects">
+  <% @projects.each do |project| %>
+    <%= project.name %>
+  <% end %>
+</ul>
