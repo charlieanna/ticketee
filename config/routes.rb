@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
   root to: 'projects#index'
-  resources :projects,only: [:index, :new, :create, :show, :edit, :update,:destroy]
+  resources :projects do
+    resources :tickets
+  end
 end

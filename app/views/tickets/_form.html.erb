@@ -1,0 +1,16 @@
+<%= form_for([@project, @ticket]) do |f| %>
+  <% if @ticket.errors.any? %>
+    <ul>
+    <% @ticket.errors.full_messages.each do |msg| %>
+      <li><%= msg%></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.submit "Create Ticket" %>
+<% end %>
