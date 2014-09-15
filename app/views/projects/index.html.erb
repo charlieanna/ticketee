@@ -2,6 +2,6 @@
 
 <ul class="projects">
   <% @projects.each do |project| %>
-    <%= project.name %>
+    <%= link_to project.name, project %>
   <% end %>
 </ul>
