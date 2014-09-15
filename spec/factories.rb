@@ -5,6 +5,8 @@ FactoryGirl.define do
   end
 
   factory :ticket do
+  	title "Title"
+  	description "Description"
     project
   end
 end
