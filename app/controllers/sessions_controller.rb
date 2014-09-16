@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.where(email: params[:session][:email]).first 
     if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id
+      cookies[:user_id] = user.id
       flash.notice = "Signed in successfully."
       redirect_to projects_path
     else

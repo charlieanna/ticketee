@@ -8,6 +8,7 @@ FactoryGirl.define do
     title "Title"
     description "Description"
     project
+    user
   end
   
   factory :user do

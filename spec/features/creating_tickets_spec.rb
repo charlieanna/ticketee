@@ -1,27 +1,34 @@
 require 'rails_helper'
 
 feature 'Creating Tickets' do
-  
-
-  scenario "Creating a ticket" do
+  before do
     create(:project, name: "Internet Explorer")
-
+    @user = create(:user)
     visit root_path
+    click_link "Sign in"
+    fill_in "Email", with: @user.email
+    fill_in "Password",with: @user.password
+    click_button "Sign in"
     click_link "Internet Explorer"
     click_link "New Ticket"
+  end
+
+
+  scenario "Creating a ticket" do
+
+
     fill_in "Title",with: "Non-standards compliance"
     fill_in "Description",with: "My pages are ugly!"
     click_button "Create Ticket"
 
+    within "#ticket #author" do
+      expect(page).to have_content "Created by #{@user.email}"
+    end
     expect(page).to have_content "Ticket has been created"
   end
 
   scenario "Creating a ticket without valid attributes fails" do
-    create(:project, name: "Internet Explorer")
 
-    visit root_path
-    click_link "Internet Explorer"
-    click_link "New Ticket"
     click_button "Create Ticket"
 
     expect(page).to have_content "Ticket has not been created."
@@ -30,11 +37,7 @@ feature 'Creating Tickets' do
   end
 
   scenario "Description must be longer than 10 characters" do
-    create(:project, name: "Internet Explorer")
 
-    visit root_path
-    click_link "Internet Explorer"
-    click_link "New Ticket"
     click_button "Create Ticket"
     fill_in "Title", with: 'Non-standards compliance'
     fill_in "Description",with: "it sucks"

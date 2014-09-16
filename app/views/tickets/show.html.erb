@@ -1,4 +1,6 @@
-<div  id="ticket"><h2><%= @ticket.title %></h2></div>
+<div  id="ticket">
+<span id="author">Created by <%= @ticket.user.email %></span>
+<h2><%= @ticket.title %></h2></div>
 <%= @ticket.description %>
 <%= link_to "Edit Ticket",edit_project_ticket_path(@project, @ticket) %>
 <%= link_to "Delete Ticket", [@project, @ticket], method: :delete,

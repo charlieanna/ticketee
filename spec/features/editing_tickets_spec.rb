@@ -2,7 +2,13 @@ require 'rails_helper'
 feature "Editing tickets" do
   let!(:project) { FactoryGirl.create(:project) }
   let!(:ticket) { FactoryGirl.create(:ticket, project: project) }
+
   before do
+    visit root_path
+    click_link "Sign in"
+    fill_in "Email", with: ticket.user.email
+    fill_in "Password",with: ticket.user.password
+    click_button "Sign in"
     visit '/'
     click_link project.name
     click_link ticket.title

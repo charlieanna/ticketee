@@ -1,8 +1,10 @@
 class TicketsController < ApplicationController
+  before_filter :require_signin!, except: [:show, :index]
   before_filter :set_project
   before_filter :set_ticket,only: [:show, :edit, :update,:destroy]
   def new
     @ticket = @project.tickets.build
+    @ticket.user = current_user
   end
   def edit
   end
@@ -11,6 +13,7 @@ class TicketsController < ApplicationController
   end
   def create
     @ticket = @project.tickets.build(ticket_params)
+    @ticket.user = current_user
     if @ticket.save
       redirect_to [@project,@ticket], notice: "Ticket has been created"
     else
