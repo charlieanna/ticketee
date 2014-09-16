@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+   def authorize_admin!
+    require_signin!
+    unless current_user.admin?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to root_path
+    end
+  end
+
+
   def current_user
     if cookies[:user_id]
       @current_user ||= User.find(cookies[:user_id]) 
