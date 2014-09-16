@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    User.find(cookies[:user_id])
+    if cookies[:user_id]
+      @current_user ||= User.find(cookies[:user_id]) 
+    else
+      nil
+    end
   end
+  helper_method :current_user
 end
