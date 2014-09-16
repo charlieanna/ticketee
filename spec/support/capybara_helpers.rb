@@ -7,13 +7,13 @@ module CapybaraHelpers
     expect(page).to(have_css("a", :text => text),
                     "Expected to see the #{text.inspect} link, but did not.")
   end
-  # def sign_in_as!(user)
-  #   visit root_path
-  #   click_link "Sign in"
-  #   fill_in "Email", with: user.email
-  #   fill_in "Password",with: user.password
-  #   click_button "Sign in"
-  # end
+  def sign_in_as!(user)
+    visit root_path
+    click_link "Sign in"
+    fill_in "Email", with: user.email
+    fill_in "Password",with: user.password
+    click_button "Sign in"
+  end
 end
 RSpec.configure do |config|
   config.include CapybaraHelpers, :type => :feature
