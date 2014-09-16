@@ -4,4 +4,5 @@ Rails.application.routes.draw do
     resources :tickets
   end
   resources :users
+  resource :session
 end
