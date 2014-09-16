@@ -10,14 +10,16 @@ FactoryGirl.define do
     project
     user
   end
-  
+
+ FactoryGirl.define do
+  sequence(:email) {|n| "user#{n}@example.com" }
   factory :user do
-    email "e@e.com"
-    name "Ankur"
-    password "aaaaaa"
-    password_confirmation "aaaaaa"
+    name "username"
+    email { generate(:email) }
+    password "hunter2"
     factory :admin_user do
       admin true
     end
   end
+end
 end
